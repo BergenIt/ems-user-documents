@@ -7,4 +7,4 @@
 5. [Руководство администратора](ems_administrator_guide/README.md);
 6. [Программа и методика испытаний](ems_pmi/README.md);
 7. [Руководство по созданию резервных копий и восстановлению системы](ems_backup_guide/README.md);
-8. [Часто задаваемые вопросы по функционалу продукта (FAQ)](ems_faq_user_guide/README.md);
+8. [Часто задаваемые вопросы по функционалу продукта (FAQ)](ems_faq_user_guide/README.md).
