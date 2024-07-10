@@ -364,7 +364,7 @@ watch -c 'docker service ps $(docker service ls -q) | grep Running'
 
 Логическая диаграмма взаимодействия компонентов системы:
 
-![full](./system_component.png)
+![full](media/system_component.png)
 
 ### Инсталляционный пакет
 
@@ -527,7 +527,7 @@ watch -c 'docker service ps $(docker service ls -q) | grep Running'
 
 В даном разделе описывается инсталляция следующей конфигурации:
 
-![dc](./system_config.png)
+![dc](media/system_config.png)
 
 Допускается отказ 2 любых нод с сохранением функционалности системы, с 2 примечаниями:
 
