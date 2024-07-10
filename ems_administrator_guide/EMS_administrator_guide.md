@@ -882,45 +882,40 @@ MINIO_ROOT_PASSWORD: minio_key
 
 1. Перейти в инструмент Opensearch Dashboards, доступный по адресу `http://<ems-ip>:52004/` (где <ems-ip> - соответствует текущему URL фронта ПО EMS) и авторизоваться. По умолчанию, пользователь `admin`, пароль `admin` (инструкцию по смене дефолтного пароля - см в разделе 4.1.9.2 текущего документа):
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix1.png)
-
+![img](media/opensearch_data_delete_fix1.png)
 
 2. Перейти в компонент Index Management -> Policy managed indices:
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix2.png)
+![img](media/opensearch_data_delete_fix2.png)
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix3.png)
+![img](media/opensearch_data_delete_fix3.png)
 
+1. Для политик в статусе Failed убедиться, что сообщение в столбце info содержит текст «Missing rollover_alias index setting»:
 
-3. Для политик в статусе Failed убедиться, что сообщение в столбце info содержит текст «Missing rollover_alias index setting»:
+![img](media/opensearch_data_delete_fix4.png)
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix4.png)
-
-
-4. Для таких индексов необходимо выполнить следующие настройки:
+1. Для таких индексов необходимо выполнить следующие настройки:
 
     4.1. Выделить и скопировать в буфер обмена название индекса без числового значения, как на рисунке ниже:
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix5.png)
+![img](media/opensearch_data_delete_fix5.png)
 
     4.2. Закрыть окно сообщения.
     4.3. Выделить (установить переключатель «галочка» слева) проблемную политику и нажать кнопку «Edit rollover alias» 
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix6.png)
+![img](media/opensearch_data_delete_fix6.png)
 
     4.4. Вставить скопированное ранее значение в поле в открывшемся окне и нажать кнопку «Edit»:
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix7.png)
+![img](media/opensearch_data_delete_fix7.png)
 
     4.5. Убедиться, что выделение с политики не снято, нажать кнопку «Retry policy»:
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix8.png)
+![img](media/opensearch_data_delete_fix8.png)
 
     4.6. В появившемся окне установить переключатель на значение «Retry policy from selected state» и нажать кнопку «Retry»:
 
-![img](media/EMS_administrator_guide_files/opensearch_data_delete_fix9.png)
-
-
+![img](media/opensearch_data_delete_fix9.png)
 
 
 ##### 4.1.10.2 Изменение срока хранения данных
@@ -929,27 +924,27 @@ MINIO_ROOT_PASSWORD: minio_key
 
 1.	Перейти в инструмент OpenSearch Dashboards, доступный по адресу `http://ems-ip:52004/` и авторизоваться. По умолчанию пользователь `admin`, пароль `admin`
 
-    ![img](media/EMS_administrator_guide_files/opensearch_data_delete1.png)
+    ![img](media/opensearch_data_delete1.png)
 
 
 2.	Перейти в компонент Index Management -> State management policies
 
-    ![img](media/EMS_administrator_guide_files/opensearch_data_delete2.png)
+    ![img](media/opensearch_data_delete2.png)
 
 
 3.	Выбрать нужную политику и нажать кнопку «Edit»:
 
-    ![img](media/EMS_administrator_guide_files/opensearch_data_delete3.png)
+    ![img](media/opensearch_data_delete3.png)
 
 
 4.	В появившемся окне выбрать «JSON editor» и нажать кнопку «Continue»
 
-    ![img](media/EMS_administrator_guide_files/opensearch_data_delete4.png)
+    ![img](media/opensearch_data_delete4.png)
 
 
 5.	В окне редактора кода найти раздел «transitions» и исправить значение параметра «min_index_age» на требуемое (в формате количества дней хранения). После чего нажать кнопку «Update»:
 
-    ![img](media/EMS_administrator_guide_files/opensearch_data_delete5.png)
+    ![img](media/opensearch_data_delete5.png)
 
 
 
