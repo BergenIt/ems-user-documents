@@ -1,10 +1,10 @@
-# Руководство по обновлению Системы EMS с версии 4.1.0 до версии 4.2.0 в режиме одной ноды
+# Руководство по обновлению Системы EMS с версии 4.2.0 до версии 4.2.1 в режиме одной ноды
 
 ## Аннотация
 
 "Element Management System" ("Система управления объектами инфраструктуры") (далее – Система, EMS) – геораспределенная система мониторинга и управления объектами инфраструктуры.
 
-Документ содержит информацию, необходимую для обновления ПО EMS с версии 4.1.0 до версии 4.2.0.
+Документ содержит информацию, необходимую для обновления ПО EMS с версии 4.2.0 до версии 4.2.1.
 
 Настоящий документ является составной частью комплекта технической документации на систему EMS и разработан в соответствии с требованиями ГОСТ 2.105-95 «Единая система конструкторской документации. Общие требования к текстовым документам».
 
@@ -163,7 +163,7 @@
 
 #### 2.3.1 Состав инсталляционного пакета для обновления
 
-> <font color="red">**Внимание:** Обновление Системы производится с помощью инсталляционного пакета новой версии (4.2.0).</font>
+> <font color="red">**Внимание:** Обновление Системы производится с помощью инсталляционного пакета новой версии (4.2.1).</font>
 
 1. Инсталляционный пакет для обновления состоит из:
 
@@ -282,7 +282,7 @@
 
 - Если окончен срок старого файла лицензий, то новый файл лицензии необходимо получать отдельно.
 
-> <font color="red">**Внимание:** Файл лицензии необходимо разместить в директории инсталляционного пакета: `~/ems-4.2.0/master/config/license.json`.</font>
+> <font color="red">**Внимание:** Файл лицензии необходимо разместить в директории инсталляционного пакета: `~/ems-4.2.1/master/config/license.json`.</font>
 
 #### 2.3.2 Требования к операционной среде
 
@@ -435,12 +435,12 @@
 
 #### 3.4.1 Переименование инсталляционного пакета
 
-Предполагается, что файл полученного инсталляционного пакета называется `ems-4.2.0.tar.gz`, если в используемом пакете используется другое имя файла - переименуйте его (или измените имя файла во всех последующих командах копирования):
+Предполагается, что файл полученного инсталляционного пакета называется `ems-4.2.1.tar.gz`, если в используемом пакете используется другое имя файла - переименуйте его (или измените имя файла во всех последующих командах копирования):
 
-- Пример выполнения переименования файла инсталляционного пакета с названием `ems.tar.gz` в название `ems-4.2.0.tar.gz`:
+- Пример выполнения переименования файла инсталляционного пакета с названием `ems.tar.gz` в название `ems-4.2.1.tar.gz`:
 
 ```bash
-mv -f ems.tar.gz ems-4.2.0.tar.gz
+mv -f ems.tar.gz ems-4.2.1.tar.gz
 ```
 
 Переименование так же может быть произведено с помощью проводника `Windows` или любого другого привычного инструмента.
@@ -451,7 +451,7 @@ mv -f ems.tar.gz ems-4.2.0.tar.gz
 
 В текущей инструкции приводится алгоритм размещения с помощью утилиты `scp` из поставки `Linux`.
 
-> Выполнение команд scp необходимо производить из рабочего каталога, в котором размещён инсталляционный пакет EMS (каталог содержащий `ems-4.2.0`).
+> Выполнение команд scp необходимо производить из рабочего каталога, в котором размещён инсталляционный пакет EMS (каталог содержащий `ems-4.2.1`).
 
 ##### 3.4.3 Размещение на `single-node`
 
@@ -460,13 +460,13 @@ mv -f ems.tar.gz ems-4.2.0.tar.gz
 > Замените {{ SINGLE_NODE_IP }} на IP адрес ВМ `single-node`.
 
 ```bash
-scp -r ./ems-4.2.0.tar.gz root@{{ SINGLE_NODE_IP }}:~/ems-4.2.0.tar.gz
+scp -r ./ems-4.2.1.tar.gz root@{{ SINGLE_NODE_IP }}:~/ems-4.2.1.tar.gz
 ```
 
 *Пример рабочего вывода в процессе выполнения:*
 
 ```bash
-$ scp -r ./ems-4.2.0.tar.gz root@192.168.1.125:~/ems-4.2.0.tar.gz
+$ scp -r ./ems-4.2.1.tar.gz root@192.168.1.125:~/ems-4.2.1.tar.gz
 192.168.1.125 Password: ***
 ```
 
@@ -499,30 +499,30 @@ $ scp ./license.json root@192.168.1.125:~/license.json
 ssh root@{{ SINGLE_NODE_IP }}
 ```
 
-> <font color="red">**Внимание:** Перед выполнением проверки пакет должен быть размещён на проверяемой ноде (выполнены действия раздела 4.2.0 настоящей инструкции).</font>
+> <font color="red">**Внимание:** Перед выполнением проверки пакет должен быть размещён на проверяемой ноде (выполнены действия раздела 4.2.1 настоящей инструкции).</font>
 
 ##### 3.5.1 Проверка ВМ на соответствие системным требованиям
 
 Для того, чтобы выполнить проверку ВМ `single-node` выполните команды:
 
 ```bash
-gzip -d ~/ems-4.2.0.tar.gz
-mkdir -p ~/ems-4.2.0
-tar -xvf ~/ems-4.2.0.tar -C ~/ems-4.2.0
-mv -f ~/license.json ~/ems-4.2.0/master/config/license.json
-cd ~/ems-4.2.0
+gzip -d ~/ems-4.2.1.tar.gz
+mkdir -p ~/ems-4.2.1
+tar -xvf ~/ems-4.2.1.tar -C ~/ems-4.2.1
+mv -f ~/license.json ~/ems-4.2.1/master/config/license.json
+cd ~/ems-4.2.1
 chmod +x -R bin/* executable/*
-chmod 0700 ~/ems-4.2.0/emsinstaller
+chmod 0700 ~/ems-4.2.1/emsinstaller
 rm -f /opt/config/emssyscheck/* || true
 rm -f /opt/ems/config/emssyscheck/* || true
-~/ems-4.2.0/emsinstaller --mode check
+~/ems-4.2.1/emsinstaller --mode check
 ```
 
 *Пример рабочего вывода в процессе выполнения:*
 
 ```text
  Выполняется проверка системы.
-/root/ems-4.2.0/bin/emssyscheck --config /root/ems-4.2.0/config/emssyscheck/requirements.json --cluster single
+/root/ems-4.2.1/bin/emssyscheck --config /root/ems-4.2.1/config/emssyscheck/requirements.json --cluster single
 ✅  Файл лицензий (Доступно: license.json) обнаружен
 ✅  Операционная система (Доступно: Oracle Linux Server 8.8) соответствует требованиям
 ✅  Количество доступных CPU (Доступно: 20; требуется: 20) соответствует требованиям
@@ -530,7 +530,7 @@ rm -f /opt/ems/config/emssyscheck/* || true
 ⚡  Доступное дисковое пространство (Доступно: bdev: /dev/mapper/ol-root; mp: /; 187.00 Gb; требуется: 200.00 Gb) не соответствует требованиям, но находится в допустимых пределах
 ✅  Версия Docker (Доступно: 24.0.0) соответствует требованиям
 ✅  Версия Docker-compose (Доступно: 2.27) соответствует требованиям
-✅  Система соответствует требованиям /root/ems-4.2.0/config/emssyscheck/requirements.json, для установки EMS!
+✅  Система соответствует требованиям /root/ems-4.2.1/config/emssyscheck/requirements.json, для установки EMS!
 
 ```
 
@@ -578,7 +578,7 @@ EMS поставляется с собственным самоподписан�
 Файл может быть отредактирован любым текстовым редактором, доступным в системе, например `vi`. Файл должен иметь следующее содержимое (описание значений переменных приведено в таблице 5):
 
 ```bash
-vi ~/ems-4.2.0/config/ems.config
+vi ~/ems-4.2.1/config/ems.config
 ```
 
 ```text
@@ -669,7 +669,7 @@ ssh root@{{ SINGLE_NODE_IP }}
 Файл может быть отредактирован любым текстовым редактором. Пример с использованием текстового редактора `vi`:
 
 ```bash
-cd ~/ems-4.2.0/
+cd ~/ems-4.2.1/
 vi master/.env
 ```
 
@@ -711,7 +711,7 @@ ssh root@{{ SINGLE_NODE_IP }}
 Файл может быть отредактирован любым текстовым редактором. Пример с использованием текстового редактора `vi`:
 
 ```bash
-cd ~/ems-4.2.0/
+cd ~/ems-4.2.1/
 vi master/.env
 ```
 
@@ -738,8 +738,8 @@ SMPP_PHONE_NUMBER=<Задайте_значение_выданное_провай
 
 * Требования к пользователю
   - Пользователь ознакомился с сопутствующей документацией:
-    - [ ] Руководство по обновлению Системы EMS v4.2.0 в режиме одной ноды;
-    - [ ] Руководство администратора Системы EMS v4.2.0.
+    - [ ] Руководство по обновлению Системы EMS v4.2.1 в режиме одной ноды;
+    - [ ] Руководство администратора Системы EMS v4.2.1.
 * Требования к аппаратному обеспечению:
   - Характеристики сервера соответствуют системным требованиям:
     - [ ] Процессоры 64-разрядные с тактовой частотой не менее 2 Ггц;
@@ -827,7 +827,7 @@ ssh root@{{ SINGLE_NODE_IP }}
 Файл может быть отредактирован любым текстовым редактором, доступным в системе, например `vi`. Внести в файл `ems.config` информацию для настройки EMS. Пример с использованием текстового редактора `vi`:
 
 ```bash
-cd ~/ems-4.2.0/
+cd ~/ems-4.2.1/
 vi config/ems.config
 ```
 
@@ -849,7 +849,7 @@ COMPOSE_FILE="compose.yaml, compose.composer.yaml"
 4. Выполните непосредственно обновление EMS:
 
 ```bash
-cd /root/ems-4.2.0
+cd /root/ems-4.2.1
 chmod 0700 ./emsinstaller
 chmod 0700 ./bin/*
 ./emsinstaller --mode update
@@ -860,7 +860,7 @@ chmod 0700 ./bin/*
 ```bash
   Запуск установки EMS.
  Выполняется проверка системы.
-/root/ems-4.2.0/bin/emssyscheck --config /root/ems-4.2.0/config/emssyscheck/requirements.json --cluster single
+/root/ems-4.2.1/bin/emssyscheck --config /root/ems-4.2.1/config/emssyscheck/requirements.json --cluster single
 ✅  Файл лицензий (Доступно: license.json) обнаружен
 ✅  Операционная система (Доступно: Oracle Linux Server 8.8) соответствует требованиям
 ✅  Количество доступных CPU (Доступно: 20; требуется: 20) соответствует требованиям
@@ -868,7 +868,7 @@ chmod 0700 ./bin/*
 ⚡  Доступное дисковое пространство (Доступно: bdev: /dev/mapper/ol-root; mp: /; 160.00 Gb; требуется: 200.00 Gb) не соответствует требованиям, но находится в допустимых пределах
 ✅  Версия Docker (Доступно: 24.0.0) соответствует требованиям
 ✅  Версия Docker-compose (Доступно: 2.27) соответствует требованиям
-✅  Система соответствует требованиям /root/ems-4.2.0/config/emssyscheck/requirements.json, для установки EMS!
+✅  Система соответствует требованиям /root/ems-4.2.1/config/emssyscheck/requirements.json, для установки EMS!
 
  Выполняется подготовка файлов.
 Выполняется распаковка архива /opt/ems/images.tar.gz...
@@ -1132,57 +1132,57 @@ watch docker ps -a
 ```bash
 $ watch docker ps -a
 CONTAINER ID   IMAGE                                                                                          COMMAND                  CREATED          STATUS                          PORTS                                                                                                                                                                          NAMES
-ba40d9d8afc8   registry.bergen.tech/ems/back/hypervisor-manager:4.2.0                                     "./hypervisor-manager"   8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-hypervisor-manager-1
-e0c545bf292d   registry.bergen.tech/ems/middle/socket-hub:4.2.0                                           "./socket-hub"           8 minutes ago    Up 7 minutes                    5100/tcp, 8080/tcp, 0.0.0.0:5101->5101/tcp, :::5101->5101/tcp                                                                                                                  tool-socket-proxy-1
-3daecba0addb   registry.bergen.tech/ems/back/backuper:4.2.0                                               "sh -c /usr/bin/entr…"   8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-backuper-1
+ba40d9d8afc8   registry.bergen.tech/ems/back/hypervisor-manager:4.2.1                                     "./hypervisor-manager"   8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-hypervisor-manager-1
+e0c545bf292d   registry.bergen.tech/ems/middle/socket-hub:4.2.1                                           "./socket-hub"           8 minutes ago    Up 7 minutes                    5100/tcp, 8080/tcp, 0.0.0.0:5101->5101/tcp, :::5101->5101/tcp                                                                                                                  tool-socket-proxy-1
+3daecba0addb   registry.bergen.tech/ems/back/backuper:4.2.1                                               "sh -c /usr/bin/entr…"   8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-backuper-1
 553c9664e494   registry.bergen.tech/library/nats:2.10.14-alpine3.19                                           "docker-entrypoint.s…"   8 minutes ago    Up 7 minutes                    6222/tcp, 8222/tcp, 0.0.0.0:9333->4222/tcp, :::9333->4222/tcp                                                                                                                  tool-event-nats-1
-358017a738ac   registry.bergen.tech/ems/back/cluster-manager:4.2.0                                        "./cluster-manager.c…"   8 minutes ago    Up 7 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  tool-cluster-manager-1
-44805f78c335   registry.bergen.tech/ems/back/bmc-manager:4.2.0                                            "./bmc-manager"          8 minutes ago    Up 7 minutes                    8080/tcp                                                                                                                                                                       tool-bmc-manager-1
-0be7cfa82060   registry.bergen.tech/ems/back/os-installer:4.2.0                                           "./os-installer"         8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-os-installer-1
-5d26e14f1e5d   registry.bergen.tech/ems/back/service-manager:4.2.0                                        "./service-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-service-manager-1
-740977c8c427   registry.bergen.tech/ems/back/web-terminal:4.2.0                                           "./ssh-web-console"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-web-terminal-1
+358017a738ac   registry.bergen.tech/ems/back/cluster-manager:4.2.1                                        "./cluster-manager.c…"   8 minutes ago    Up 7 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  tool-cluster-manager-1
+44805f78c335   registry.bergen.tech/ems/back/bmc-manager:4.2.1                                            "./bmc-manager"          8 minutes ago    Up 7 minutes                    8080/tcp                                                                                                                                                                       tool-bmc-manager-1
+0be7cfa82060   registry.bergen.tech/ems/back/os-installer:4.2.1                                           "./os-installer"         8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-os-installer-1
+5d26e14f1e5d   registry.bergen.tech/ems/back/service-manager:4.2.1                                        "./service-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-service-manager-1
+740977c8c427   registry.bergen.tech/ems/back/web-terminal:4.2.1                                           "./ssh-web-console"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-web-terminal-1
 1c233ffed658   registry.bergen.tech/library/nats:2.10.14-alpine3.19                                           "docker-entrypoint.s…"   8 minutes ago    Up 7 minutes                    6222/tcp, 8222/tcp, 0.0.0.0:5333->4222/tcp, :::5333->4222/tcp                                                                                                                  tool-agent-nats-1
 95fcd87f22e6   registry.bergen.tech/library/nats:2.10.14-alpine3.19                                           "docker-entrypoint.s…"   8 minutes ago    Up 7 minutes                    6222/tcp, 8222/tcp, 0.0.0.0:44222->4222/tcp, :::44222->4222/tcp                                                                                                                tool-session-nats-1
-7f87da1b237c   registry.bergen.tech/ems/back/template-manager:4.2.0                                       "./template-manager.…"   8 minutes ago    Up 7 minutes                    0.0.0.0:601->601/tcp, 0.0.0.0:514->514/udp, :::601->601/tcp, :::514->514/udp, 0.0.0.0:6514->6514/udp, :::6514->6514/udp, 0.0.0.0:6514->6514/tcp, :::6514->6514/tcp, 8080/tcp   tool-template-manager-1
+7f87da1b237c   registry.bergen.tech/ems/back/template-manager:4.2.1                                       "./template-manager.…"   8 minutes ago    Up 7 minutes                    0.0.0.0:601->601/tcp, 0.0.0.0:514->514/udp, :::601->601/tcp, :::514->514/udp, 0.0.0.0:6514->6514/udp, :::6514->6514/udp, 0.0.0.0:6514->6514/tcp, :::6514->6514/tcp, 8080/tcp   tool-template-manager-1
 2cce51dcfdda   registry.bergen.tech/library/minio:v0.3.3                                                      "/usr/bin/docker-ent…"   8 minutes ago    Up 7 minutes                    0.0.0.0:9000->9000/tcp, :::9000->9000/tcp                                                                                                                                      tool-slave-minio-1
-2738d1503e62   registry.bergen.tech/ems/back/sso-center:4.2.0-tool                                        "./main"                 8 minutes ago    Up 7 minutes                    389/tcp, 636/tcp, 8080/tcp, 0.0.0.0:389->3893/tcp, :::389->3893/tcp, 0.0.0.0:636->3894/tcp, :::636->3894/tcp                                                                   tool-sso-center-1
-f143abf6acc3   registry.bergen.tech/ems/back/linux-manager:4.2.0                                          "./linux-manager"        8 minutes ago    Up 7 minutes                    443/tcp, 8080/tcp                                                                                                                                                              tool-linux-manager-1
-fddcc9a0f443   registry.bergen.tech/ems/back/network-manager:4.2.0                                        "./network-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-network-manager-1
+2738d1503e62   registry.bergen.tech/ems/back/sso-center:4.2.1-tool                                        "./main"                 8 minutes ago    Up 7 minutes                    389/tcp, 636/tcp, 8080/tcp, 0.0.0.0:389->3893/tcp, :::389->3893/tcp, 0.0.0.0:636->3894/tcp, :::636->3894/tcp                                                                   tool-sso-center-1
+f143abf6acc3   registry.bergen.tech/ems/back/linux-manager:4.2.1                                          "./linux-manager"        8 minutes ago    Up 7 minutes                    443/tcp, 8080/tcp                                                                                                                                                              tool-linux-manager-1
+fddcc9a0f443   registry.bergen.tech/ems/back/network-manager:4.2.1                                        "./network-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-network-manager-1
 d4cb2cc75fa9   registry.bergen.tech/library/sftp:5.1.5                                                        "tini -- dotnet ES.S…"   8 minutes ago    Up 7 minutes                    25080/tcp, 0.0.0.0:2222->22/tcp, :::2222->22/tcp                                                                                                                               tool-sftp-proxy-1
-594d81558bbe   registry.bergen.tech/ems/back/windows-manager:4.2.0                                        "./windows-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-windows-manager-1
-9e838268b0b9   registry.bergen.tech/ems/middle/proto-gateway:4.2.0                                        "./proto-gateway"        10 minutes ago   Up 9 minutes (healthy)          8081/tcp, 0.0.0.0:443->8080/tcp, :::443->8080/tcp                                                                                                                              master-api-gw-1
-e60e54de4db3   registry.bergen.tech/ems/middle/system-metric-manager:4.2.0-presenter                      "./system-metric-pre…"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-system-metric-presenter-1
-5abcd1336ea7   registry.bergen.tech/ems/middle/device-metric-manager:4.2.0-presenter                      "./device-metric-man…"   10 minutes ago   Up 10 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  master-device-metric-presenter-1
-5aa86956f09f   registry.bergen.tech/ems/middle/user-service.config:4.2.0                                  "./UserService.Main"     10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-user-service-1
-c6227259775c   registry.bergen.tech/ems/middle/master-network-watcher:4.2.0                               "./master-network-wa…"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-network-watcher-1
-9b7d05af9ec9   registry.bergen.tech/ems/middle/task-service.config:4.2.0                                  "./TaskService"          10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-task-service-1
-ebeb39838a87   registry.bergen.tech/ems/middle/system-service:4.2.0                                       "./system-service"       10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-system-service-1
-920fe5b4415a   registry.bergen.tech/ems/middle/device-metric-manager:4.2.0-writer                         "./device-metric-man…"   10 minutes ago   Up 9 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  master-device-metric-writer-1
-e86a07fa277a   registry.bergen.tech/ems/middle/ui-navigator:4.2.0                                         "./ui-navigator"         10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-ui-navigator-1
-897e9337f959   registry.bergen.tech/ems/middle/device-store:4.2.0                                         "./device-store.main"    10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-device-store-1
-49254a08eb3b   registry.bergen.tech/ems/middle/repository-service:4.2.0                                   "./repository-service"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-repository-service-1
-7ef3a50e5d75   registry.bergen.tech/ems/middle/system-metric-manager:4.2.0-writer                         "./system-metric-wri…"   10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-system-metric-writer-1
-f9b86eef18c7   registry.bergen.tech/ems/middle/device-metric-manager:4.2.0-writer                         "./device-metric-man…"   10 minutes ago   Up 9 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  master-device-metric-writer-2
-688e2063aecb   registry.bergen.tech/ems/middle/docs:4.2.0                                                 "docker-entrypoint.s…"   10 minutes ago   Up 10 minutes (healthy)         3000/tcp                                                                                                                                                                       master-docs-1
-63850f4a1577   registry.bergen.tech/ems/back/backuper:4.2.0                                               "sh -c /usr/bin/entr…"   10 minutes ago   Up 10 minutes                                                                                                                                                                                                  master-backuper-master-1
+594d81558bbe   registry.bergen.tech/ems/back/windows-manager:4.2.1                                        "./windows-manager"      8 minutes ago    Up 7 minutes                                                                                                                                                                                                   tool-windows-manager-1
+9e838268b0b9   registry.bergen.tech/ems/middle/proto-gateway:4.2.1                                        "./proto-gateway"        10 minutes ago   Up 9 minutes (healthy)          8081/tcp, 0.0.0.0:443->8080/tcp, :::443->8080/tcp                                                                                                                              master-api-gw-1
+e60e54de4db3   registry.bergen.tech/ems/middle/system-metric-manager:4.2.1-presenter                      "./system-metric-pre…"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-system-metric-presenter-1
+5abcd1336ea7   registry.bergen.tech/ems/middle/device-metric-manager:4.2.1-presenter                      "./device-metric-man…"   10 minutes ago   Up 10 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  master-device-metric-presenter-1
+5aa86956f09f   registry.bergen.tech/ems/middle/user-service.config:4.2.1                                  "./UserService.Main"     10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-user-service-1
+c6227259775c   registry.bergen.tech/ems/middle/master-network-watcher:4.2.1                               "./master-network-wa…"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-network-watcher-1
+9b7d05af9ec9   registry.bergen.tech/ems/middle/task-service.config:4.2.1                                  "./TaskService"          10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-task-service-1
+ebeb39838a87   registry.bergen.tech/ems/middle/system-service:4.2.1                                       "./system-service"       10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-system-service-1
+920fe5b4415a   registry.bergen.tech/ems/middle/device-metric-manager:4.2.1-writer                         "./device-metric-man…"   10 minutes ago   Up 9 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  master-device-metric-writer-1
+e86a07fa277a   registry.bergen.tech/ems/middle/ui-navigator:4.2.1                                         "./ui-navigator"         10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-ui-navigator-1
+897e9337f959   registry.bergen.tech/ems/middle/device-store:4.2.1                                         "./device-store.main"    10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-device-store-1
+49254a08eb3b   registry.bergen.tech/ems/middle/repository-service:4.2.1                                   "./repository-service"   10 minutes ago   Up 10 minutes (healthy)         8080/tcp                                                                                                                                                                       master-repository-service-1
+7ef3a50e5d75   registry.bergen.tech/ems/middle/system-metric-manager:4.2.1-writer                         "./system-metric-wri…"   10 minutes ago   Up 9 minutes (healthy)          8080/tcp                                                                                                                                                                       master-system-metric-writer-1
+f9b86eef18c7   registry.bergen.tech/ems/middle/device-metric-manager:4.2.1-writer                         "./device-metric-man…"   10 minutes ago   Up 9 minutes (healthy)          8080-8081/tcp                                                                                                                                                                  master-device-metric-writer-2
+688e2063aecb   registry.bergen.tech/ems/middle/docs:4.2.1                                                 "docker-entrypoint.s…"   10 minutes ago   Up 10 minutes (healthy)         3000/tcp                                                                                                                                                                       master-docs-1
+63850f4a1577   registry.bergen.tech/ems/back/backuper:4.2.1                                               "sh -c /usr/bin/entr…"   10 minutes ago   Up 10 minutes                                                                                                                                                                                                  master-backuper-master-1
 c8d7a88349ff   registry.bergen.tech/ems/deploy/opensearch:2.8.0-acme-1.0.2                                    "/bin/sh -c /tls/run…"   10 minutes ago   Up 10 minutes                   9300/tcp, 9600/tcp, 9650/tcp, 0.0.0.0:52003->9200/tcp, :::52003->9200/tcp                                                                                                      master-opensearch-1
-90854ace5970   registry.bergen.tech/ems/middle/report-scripts:4.2.0                                       "./report-service"       10 minutes ago   Up 10 minutes                   8080/tcp                                                                                                                                                                       master-report-service-1
+90854ace5970   registry.bergen.tech/ems/middle/report-scripts:4.2.1                                       "./report-service"       10 minutes ago   Up 10 minutes                   8080/tcp                                                                                                                                                                       master-report-service-1
 a63a529016d1   registry.bergen.tech/ems/deploy/data-prepper:2.5.0                                             "./run.sh"               10 minutes ago   Up 10 minutes                   0.0.0.0:21890->21890/tcp, :::21890->21890/tcp                                                                                                                                  master-data-prepper-1
 66c3b66d474d   registry.bergen.tech/library/opensearch-dashboards:2.6.0-openssl                               "sh -c ./opensearch-…"   10 minutes ago   Up 10 minutes                   0.0.0.0:52004->5601/tcp, :::52004->5601/tcp                                                                                                                                    master-opensearch-dashboards-1
-b9f9c5f9b148   registry.bergen.tech/ems/back/sso-center:4.2.0-master                                      "./main -c https://r…"   10 minutes ago   Up 10 minutes                   389/tcp, 636/tcp, 8080/tcp                                                                                                                                                     master-sso-center-master-1
-2bb94c5b9772   registry.bergen.tech/ems/deploy/postgres:4.2.0-9b9844e7                                        "./run.sh -c ssl=on …"   10 minutes ago   Up 10 minutes                   0.0.0.0:52005->5432/tcp, :::52005->5432/tcp                                                                                                                                    master-psql-1
-ce7b4d17c5bb   registry.bergen.tech/ems/front:4.2.0                                                       "sh /entrypoint.sh n…"   10 minutes ago   Up 10 minutes                   80/tcp                                                                                                                                                                         master-ui-1
+b9f9c5f9b148   registry.bergen.tech/ems/back/sso-center:4.2.1-master                                      "./main -c https://r…"   10 minutes ago   Up 10 minutes                   389/tcp, 636/tcp, 8080/tcp                                                                                                                                                     master-sso-center-master-1
+2bb94c5b9772   registry.bergen.tech/ems/deploy/postgres:4.2.1-9b9844e7                                        "./run.sh -c ssl=on …"   10 minutes ago   Up 10 minutes                   0.0.0.0:52005->5432/tcp, :::52005->5432/tcp                                                                                                                                    master-psql-1
+ce7b4d17c5bb   registry.bergen.tech/ems/front:4.2.1                                                       "sh /entrypoint.sh n…"   10 minutes ago   Up 10 minutes                   80/tcp                                                                                                                                                                         master-ui-1
 39e19614b31e   registry.bergen.tech/ems/deploy/nats:4.0.0-1444ae4d                                            "./run.sh -c /nats_c…"   10 minutes ago   Up 10 minutes                   4222/tcp, 6222/tcp, 8222/tcp, 0.0.0.0:52002->2222/tcp, :::52002->2222/tcp                                                                                                      master-kv-nats-1
-7fe65d51356f   registry.bergen.tech/ems/back/cluster-manager:4.2.0                                        "./cluster-manager.c…"   10 minutes ago   Up 10 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  master-cluster-manager-1
-5c0422edd704   registry.bergen.tech/ems/middle/license-server:4.2.0                                       "./license-server"       10 minutes ago   Up 10 minutes                   3031/tcp                                                                                                                                                                       master-license-server-1
+7fe65d51356f   registry.bergen.tech/ems/back/cluster-manager:4.2.1                                        "./cluster-manager.c…"   10 minutes ago   Up 10 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  master-cluster-manager-1
+5c0422edd704   registry.bergen.tech/ems/middle/license-server:4.2.1                                       "./license-server"       10 minutes ago   Up 10 minutes                   3031/tcp                                                                                                                                                                       master-license-server-1
 c535637e36d0   registry.bergen.tech/ems/deploy/nats:4.0.0-1444ae4d                                            "./run.sh -c /nats_c…"   12 minutes ago   Up 12 minutes                   4222/tcp, 6222/tcp, 8222/tcp, 0.0.0.0:7091->7091/tcp, :::7091->7091/tcp                                                                                                        transport-leaf-nats-1
-908ae740b77b   registry.bergen.tech/ems/back/backuper:4.2.0                                               "sh -c /usr/bin/entr…"   12 minutes ago   Up 9 minutes                                                                                                                                                                                                   transport-backuper-transport-1
+908ae740b77b   registry.bergen.tech/ems/back/backuper:4.2.1                                               "sh -c /usr/bin/entr…"   12 minutes ago   Up 9 minutes                                                                                                                                                                                                   transport-backuper-transport-1
 4faf8ad4e347   registry.bergen.tech/library/minio:v0.3.3                                                      "/usr/bin/docker-ent…"   12 minutes ago   Up 12 minutes                   9000/tcp                                                                                                                                                                       transport-minio-1
 1c9fc2a150fe   registry.bergen.tech/ems/deploy/step-ca:4.0.0-803f5368                                         "/bin/bash run.sh /b…"   12 minutes ago   Up 12 minutes (healthy)                                                                                                                                                                                        transport-acme-1
-ea77431a23fc   registry.bergen.tech/ems/back/cluster-manager:4.2.0                                        "./cluster-manager.c…"   12 minutes ago   Up 12 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  transport-cluster-manager-1
-313b032494b2   registry.bergen.tech/ems/middle/socket-hub:4.2.0                                           "./socket-hub"           12 minutes ago   Up 12 minutes                   5100-5101/tcp, 8080/tcp                                                                                                                                                        transport-socket-hub-1
+ea77431a23fc   registry.bergen.tech/ems/back/cluster-manager:4.2.1                                        "./cluster-manager.c…"   12 minutes ago   Up 12 minutes (healthy)         8080-8081/tcp                                                                                                                                                                  transport-cluster-manager-1
+313b032494b2   registry.bergen.tech/ems/middle/socket-hub:4.2.1                                           "./socket-hub"           12 minutes ago   Up 12 minutes                   5100-5101/tcp, 8080/tcp                                                                                                                                                        transport-socket-hub-1
 3c5e1dc01f34   registry.bergen.tech/library/monitoring/opentelemetry/opentelemetry-collector-contrib:0.88.0   "/otelcol-contrib --…"   12 minutes ago   Restarting (1) 28 seconds ago                                                                                                                                                                                  transport-otel-collector-1
-300e0b41dd9d   registry.bergen.tech/ems/deploy/reverse-proxy:4.2.0-dev-c5dca8b7                               "./reverse-proxy"        12 minutes ago   Up 12 minutes                   5100/tcp, 8080/tcp, 0.0.0.0:7071->7071/tcp, :::7071->7071/tcp                                                                                                                  transport-reverse-proxy-1
+300e0b41dd9d   registry.bergen.tech/ems/deploy/reverse-proxy:4.2.1-dev-c5dca8b7                               "./reverse-proxy"        12 minutes ago   Up 12 minutes                   5100/tcp, 8080/tcp, 0.0.0.0:7071->7071/tcp, :::7071->7071/tcp                                                                                                                  transport-reverse-proxy-1
 
 ```
 
@@ -1208,11 +1208,11 @@ ea77431a23fc   registry.bergen.tech/ems/back/cluster-manager:4.2.0              
 
 ### Перечень ссылочных документов
 
-- Руководство пользователя EMS v4.2.0;
-- Руководство администратора Системы EMS v4.2.0;
-- Руководство по инсталляции Системы EMS v4.2.0 в режиме одной ноды;
-- Руководство по обновлению Системы EMS с версии 4.1.0 до версии 4.2.0 в режиме одной ноды;  
-- Программа и методика испытаний системы EMS v4.2.0.
+- Руководство пользователя EMS v4.2.1;
+- Руководство администратора Системы EMS v4.2.1;
+- Руководство по инсталляции Системы EMS v4.2.1 в режиме одной ноды;
+- Руководство по обновлению Системы EMS с версии 4.2.0 до версии 4.2.1 в режиме одной ноды;  
+- Программа и методика испытаний системы EMS v4.2.1.
 
 ### Справочная информация
 
@@ -1255,7 +1255,7 @@ docker exec -it transport-acme-1 cat /home/step/config/defaults.json | grep "fin
 
 Для того, чтобы использовать собственный корневой сертификат вместо самоподписанного из поставки EMS необходимо выполнить следующие шаги:
 
-> Если генерация конфигурации центра сертификации выполнялась ранее, достаточно просто заменить инсталляционном пакете в каталоге /root/ems-4.2.0/transport/config/ содержимое каталога acme_config и файлы CA.key и CA.crt.
+> Если генерация конфигурации центра сертификации выполнялась ранее, достаточно просто заменить инсталляционном пакете в каталоге /root/ems-4.2.1/transport/config/ содержимое каталога acme_config и файлы CA.key и CA.crt.
 
 1. Разместить файл ключа и файл сертификата в `single-node`(**имена файлов обязательно должны быть CA.key и CA.crt соответственно**):
 

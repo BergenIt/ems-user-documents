@@ -1,10 +1,10 @@
-# Руководство администратора Системы EMS v4.2
+# Руководство администратора Системы EMS v4.2.1
 
 ## Аннотация
 
 "Element Management System" ("Система управления объектами инфраструктуры") (далее – Система, EMS) – геораспределенная система мониторинга и управления объектами инфраструктуры.
 
-Документ содержит информацию, необходимую для администрирования ПО EMS версии 4.2.
+Документ содержит информацию, необходимую для администрирования ПО EMS версии 4.2.1
 
 Настоящий документ является составной частью комплекта технической документации на систему EMS и разработан в соответствии с требованиями ГОСТ 2.105-95 «Единая система конструкторской документации. Общие требования к текстовым документам».
 
@@ -347,24 +347,24 @@
 Для того, чтобы выполнить проверку ВМ `single-node` выполните команды:
 
 ```bash
-gzip -d ~/ems-4.2.0.tar.gz
-mkdir -p ~/ems-4.2.0
-tar -xvf ~/ems-4.2.0.tar -C ~/ems-4.2.0
-mv -f ~/license.json ~/ems-4.2.0/master/config/license.json
-cd ~/ems-4.2.0
+gzip -d ~/ems-4.2.1.tar.gz
+mkdir -p ~/ems-4.2.1
+tar -xvf ~/ems-4.2.1.tar -C ~/ems-4.2.1
+mv -f ~/license.json ~/ems-4.2.1/master/config/license.json
+cd ~/ems-4.2.1
 chmod +x -R bin/* executable/*
-chmod 0700 ~/ems-4.2.0/emsinstaller
+chmod 0700 ~/ems-4.2.1/emsinstaller
 rm -f /opt/config/emssyscheck/* || true
 rm -f /opt/ems/config/emssyscheck/* || true
-~/ems-4.2.0/emsinstaller --mode check
+~/ems-4.2.1/emsinstaller --mode check
 ```
 
 *Пример рабочего вывода в процессе выполнения:*
 
 ```text
-~/ems-4.2.0/emsinstaller --mode check
+~/ems-4.2.1/emsinstaller --mode check
  Выполняется проверка системы.
-/root/ems-4.2.0/bin/emssyscheck --config /root/ems-4.2.0/config/emssyscheck/requirements.json --cluster single
+/root/ems-4.2.1/bin/emssyscheck --config /root/ems-4.2.1/config/emssyscheck/requirements.json --cluster single
 ✅  Файл лицензий (Доступно: license.json) обнаружен
 ✅  Операционная система (Доступно: Oracle Linux Server 8.8) соответствует требованиям
 ✅  Количество доступных CPU (Доступно: 20; требуется: 20) соответствует требованиям
@@ -372,7 +372,7 @@ rm -f /opt/ems/config/emssyscheck/* || true
 ⚡  Доступное дисковое пространство (Доступно: bdev: /dev/mapper/ol-root; mp: /; 187.00 Gb; требуется: 200.00 Gb) не соответствует требованиям, но находится в допустимых пределах
 ✅  Версия Docker (Доступно: 24.0.0) соответствует требованиям
 ✅  Версия Docker-compose (Доступно: 2.27) соответствует требованиям
-✅  Система соответствует требованиям /root/ems-4.2.0/config/emssyscheck/requirements.json, для установки EMS!
+✅  Система соответствует требованиям /root/ems-4.2.1/config/emssyscheck/requirements.json, для установки EMS!
 
 ```
 
@@ -974,11 +974,11 @@ $ watch docker ps -a
 CONTAINER ID  IMAGE                                               COMMAND    CREATED        STATUS         PORTS   NAMES
 ...           localhost:5000/library/step-ca:0.24.2         ...        3 minutes ago  Up 3 minutes   ...     ems-acme-1
 ...           localhost:5000/ems/deploy/nats:2.9.18         ...        3 minutes ago  Up 3 minutes   ...     ems-leaf-nats-1
-...           localhost:5000/ems/deploy/system-minio:4.2.0  ...        3 minutes ago  Up 3 minutes   ...     ems-minio-1
+...           localhost:5000/ems/deploy/system-minio:4.2.1  ...        3 minutes ago  Up 3 minutes   ...     ems-minio-1
 ...           localhost:5000/ems/middle/socket-hub:3.3.0    ...        3 minutes ago  Up 3 minutes   ...     ems-socket-hub-1
 ...           localhost:5000/library/traefik:v2.9.8         ...        3 minutes ago  Up 3 minutes   ...     ems-traefik-1
 ...           registry:2                                    ...        3 minutes ago  Up 3 minutes   ...     registry
-...           localhost:5000/ems/back/watchdog:4.2.0        ...        3 minutes ago  Up 3 minutes   ...     ems-watchdog-transport-1
+...           localhost:5000/ems/back/watchdog:4.2.1        ...        3 minutes ago  Up 3 minutes   ...     ems-watchdog-transport-1
 ```
 
 ##### 4.2.1.2 Мониторинг состояния `master_cluster`
@@ -998,30 +998,30 @@ watch docker ps -a
 ```bash
 $ watch docker ps -a
 CONTAINER ID  IMAGE                                                              COMMAND    CREATED        STATUS         PORTS   NAMES
-...           localhost:5000/ems/middle/proto-gateway:4.2.0                      ...        3 minutes ago  Up 3 minutes   ...     ems-api-gw-1
-...           localhost:5000/ems/back/glauth:4.2.0                               ...        3 minutes ago  Up 3 minutes   ...     ems-device-authory-center-master-1
-...           localhost:5000/ems/middle/device-metric-manager:4.2.0-presenter    ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-presenter-1
-...           localhost:5000/ems/middle/device-metric-manager:4.2.0-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-writer-1
-...           localhost:5000/ems/middle/device-metric-manager:4.2.0-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-writer-2
-...           localhost:5000/ems/middle/device-store:4.2.0                       ...        3 minutes ago  Up 3 minutes   ...     ems-device-store-1
-...           localhost:5000/ems/middle/docs:4.2.0                               ...        3 minutes ago  Up 3 minutes   ...     ems-docs-1
-...           localhost:5000/ems/middle/explorer:4.2.0                           ...        3 minutes ago  Up 3 minutes   ...     ems-explorer-1
+...           localhost:5000/ems/middle/proto-gateway:4.2.1                      ...        3 minutes ago  Up 3 minutes   ...     ems-api-gw-1
+...           localhost:5000/ems/back/glauth:4.2.1                               ...        3 minutes ago  Up 3 minutes   ...     ems-device-authory-center-master-1
+...           localhost:5000/ems/middle/device-metric-manager:4.2.1-presenter    ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-presenter-1
+...           localhost:5000/ems/middle/device-metric-manager:4.2.1-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-writer-1
+...           localhost:5000/ems/middle/device-metric-manager:4.2.1-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-device-metric-writer-2
+...           localhost:5000/ems/middle/device-store:4.2.1                       ...        3 minutes ago  Up 3 minutes   ...     ems-device-store-1
+...           localhost:5000/ems/middle/docs:4.2.1                               ...        3 minutes ago  Up 3 minutes   ...     ems-docs-1
+...           localhost:5000/ems/middle/explorer:4.2.1                           ...        3 minutes ago  Up 3 minutes   ...     ems-explorer-1
 ...           localhost:5000/ems/deploy/nats:2.9.18                              ...        3 minutes ago  Up 3 minutes   ...     ems-kv-nats-1
 ...           localhost:5000/lic/license-server:1.0.9                            ...        3 minutes ago  Up 3 minutes   ...     ems-license-server-1
-...           localhost:5000/ems/middle/master-network-watcher:4.2.0             ...        3 minutes ago  Up 3 minutes   ...     ems-network-watcher-1
+...           localhost:5000/ems/middle/master-network-watcher:4.2.1             ...        3 minutes ago  Up 3 minutes   ...     ems-network-watcher-1
 ...           localhost:5000/ems/deploy/opensearch:2.8.0-acme-1.0                ...        3 minutes ago  Up 3 minutes   ...     ems-opensearch-1
 ...           localhost:5000/library/opensearch-dashboards:2.6.0-openssl         ...        3 minutes ago  Up 3 minutes   ...     ems-opensearch-dashboards-1
 ...           localhost:5000/library/postgres:14.6-alpine3.17                    ...        3 minutes ago  Up 3 minutes   ...     ems-psql-1
 ...           localhost:5000/library/redis:7.0.7-alpine3.17                      ...        3 minutes ago  Up 3 minutes   ...     ems-redis-1
-...           localhost:5000/ems/middle/report-scripts:4.2.0                     ...        3 minutes ago  Up 3 minutes   ...     ems-report-service-1
-...           localhost:5000/ems/middle/repository-service:4.2.0                 ...        3 minutes ago  Up 3 minutes   ...     ems-repository-service-1
-...           localhost:5000/ems/middle/system-metric-manager:4.2.0-presenter    ...        3 minutes ago  Up 3 minutes   ...     ems-system-metric-presenter-1
-...           localhost:5000/ems/middle/system-metric-manager:4.2.0-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-system-metric-writer-1
-...           localhost:5000/ems/middle/system-service:4.2.0                     ...        3 minutes ago  Up 3 minutes   ...     ems-system-service-1
-...           localhost:5000/ems/middle/task-service.config:4.2.0                ...        3 minutes ago  Up 3 minutes   ...     ems-task-service-1
-...           localhost:5000/ems/front:4.2.0                                     ...        3 minutes ago  Up 3 minutes   ...     ems-ui-1
-...           localhost:5000/ems/middle/user-service.config:4.2.0                ...        3 minutes ago  Up 3 minutes   ...     ems-user-service-1
-...           localhost:5000/ems/back/watchdog:4.2.0                             ...        3 minutes ago  Up 3 minutes   ...     ems-watchdog-master-1
+...           localhost:5000/ems/middle/report-scripts:4.2.1                     ...        3 minutes ago  Up 3 minutes   ...     ems-report-service-1
+...           localhost:5000/ems/middle/repository-service:4.2.1                 ...        3 minutes ago  Up 3 minutes   ...     ems-repository-service-1
+...           localhost:5000/ems/middle/system-metric-manager:4.2.1-presenter    ...        3 minutes ago  Up 3 minutes   ...     ems-system-metric-presenter-1
+...           localhost:5000/ems/middle/system-metric-manager:4.2.1-writer       ...        3 minutes ago  Up 3 minutes   ...     ems-system-metric-writer-1
+...           localhost:5000/ems/middle/system-service:4.2.1                     ...        3 minutes ago  Up 3 minutes   ...     ems-system-service-1
+...           localhost:5000/ems/middle/task-service.config:4.2.1                ...        3 minutes ago  Up 3 minutes   ...     ems-task-service-1
+...           localhost:5000/ems/front:4.2.1                                     ...        3 minutes ago  Up 3 minutes   ...     ems-ui-1
+...           localhost:5000/ems/middle/user-service.config:4.2.1                ...        3 minutes ago  Up 3 minutes   ...     ems-user-service-1
+...           localhost:5000/ems/back/watchdog:4.2.1                             ...        3 minutes ago  Up 3 minutes   ...     ems-watchdog-master-1
 ...           registry:2                                                         ...        3 minutes ago  Up 3 minutes   ...     registry
 ```
 
@@ -1043,38 +1043,38 @@ watch docker ps -a
 $ watch docker ps -a
 CONTAINER ID  IMAGE                                                   COMMAND    CREATED         STATUS         PORTS   NAMES
 ...           localhost:5000/ems/deploy/nats:2.9.18                   ...        3 minutes ago   UP 3 minutes   ...     ems-agent-nats-1 
-...           localhost:5000/ems/back/backup-handler:4.2.0            ...        3 minutes ago   UP 3 minutes   ...     ems-backup-handler-1
-...           localhost:5000/ems/back/bmcbios-handler:4.2.0           ...        3 minutes ago   UP 3 minutes   ...     ems-bmcbios-handler-1
-...           localhost:5000/ems/back/cacher:4.2.0                    ...        3 minutes ago   UP 3 minutes   ...     ems-cacher-1
-...           localhost:5000/ems/back/cacher:4.2.0                    ...        3 minutes ago   UP 3 minutes   ...     ems-cacher-2
-...           localhost:5000/ems/back/glauth:4.2.0                    ...        3 minutes ago   UP 3 minutes   ...     ems-device-authory-center-1
-...           localhost:5000/ems/back/dhcp-heathchecker:4.2.0         ...        3 minutes ago   UP 3 minutes   ...     ems-dhcp-healthchecker-1
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-1
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-2
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-3
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-4
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-5
-...           localhost:5000/ems/back/dispatcher:4.2.0                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-host-1
+...           localhost:5000/ems/back/backup-handler:4.2.1            ...        3 minutes ago   UP 3 minutes   ...     ems-backup-handler-1
+...           localhost:5000/ems/back/bmcbios-handler:4.2.1           ...        3 minutes ago   UP 3 minutes   ...     ems-bmcbios-handler-1
+...           localhost:5000/ems/back/cacher:4.2.1                    ...        3 minutes ago   UP 3 minutes   ...     ems-cacher-1
+...           localhost:5000/ems/back/cacher:4.2.1                    ...        3 minutes ago   UP 3 minutes   ...     ems-cacher-2
+...           localhost:5000/ems/back/glauth:4.2.1                    ...        3 minutes ago   UP 3 minutes   ...     ems-device-authory-center-1
+...           localhost:5000/ems/back/dhcp-heathchecker:4.2.1         ...        3 minutes ago   UP 3 minutes   ...     ems-dhcp-healthchecker-1
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-1
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-2
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-3
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-4
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-5
+...           localhost:5000/ems/back/dispatcher:4.2.1                ...        3 minutes ago   UP 3 minutes   ...     ems-dispatcher-host-1
 ...           localhost:5000/ems/deploy/nats:2.9.18                   ...        3 minutes ago   UP 3 minutes   ...     ems-event-nats-1
-...           localhost:5000/ems/back/fping-handler:4.2.0             ...        3 minutes ago   UP 3 minutes   ...     ems-fping-handler-1
-...           localhost:5000/ems/back/fping-handler:4.2.0             ...        3 minutes ago   UP 3 minutes   ...     ems-fping-handler-2
-...           localhost:5000/ems/back/hypervisor-handler:4.2.0        ...        3 minutes ago   UP 3 minutes   ...     ems-hypervisor-handler-1
-...           localhost:5000/ems/back/ipmi-handler:4.2.0              ...        3 minutes ago   UP 3 minutes   ...     ems-ipmi-handler-1
-...           localhost:5000/ems/back/netboot-handler:4.2.0           ...        3 minutes ago   UP 3 minutes   ...     ems-netboot-handler-1
-...           localhost:5000/ems/back/os-manager-handler:4.2.0        ...        3 minutes ago   UP 3 minutes   ...     ems-os-manager-1
-...           localhost:5000/ems/back/redfish-handler:4.2.0           ...        3 minutes ago   UP 3 minutes   ...     ems-redfish-handler-1
+...           localhost:5000/ems/back/fping-handler:4.2.1             ...        3 minutes ago   UP 3 minutes   ...     ems-fping-handler-1
+...           localhost:5000/ems/back/fping-handler:4.2.1             ...        3 minutes ago   UP 3 minutes   ...     ems-fping-handler-2
+...           localhost:5000/ems/back/hypervisor-handler:4.2.1        ...        3 minutes ago   UP 3 minutes   ...     ems-hypervisor-handler-1
+...           localhost:5000/ems/back/ipmi-handler:4.2.1              ...        3 minutes ago   UP 3 minutes   ...     ems-ipmi-handler-1
+...           localhost:5000/ems/back/netboot-handler:4.2.1           ...        3 minutes ago   UP 3 minutes   ...     ems-netboot-handler-1
+...           localhost:5000/ems/back/os-manager-handler:4.2.1        ...        3 minutes ago   UP 3 minutes   ...     ems-os-manager-1
+...           localhost:5000/ems/back/redfish-handler:4.2.1           ...        3 minutes ago   UP 3 minutes   ...     ems-redfish-handler-1
 ...           localhost:5000/library/redis:7.0.7-alpine3.17           ...        3 minutes ago   UP 3 minutes   ...     ems-redis-1
-...           localhost:5000/ems/back/service-monitoring:4.2.0        ...        3 minutes ago   UP 3 minutes   ...     ems-service-monitoring-1
+...           localhost:5000/ems/back/service-monitoring:4.2.1        ...        3 minutes ago   UP 3 minutes   ...     ems-service-monitoring-1
 ...           localhost:5000/library/sftp:5.1.5                       ...        3 minutes ago   UP 3 minutes   ...     ems-sftp-proxy-1
 ...           localhost:5000/library/minio:v0.3.3                     ...        3 minutes ago   UP 3 minutes   ...     ems-slave-minio-1
-...           localhost:5000/ems/back/smart-handler:4.2.0             ...        3 minutes ago   UP 3 minutes   ...     ems-smart-handler-1
-...           localhost:5000/ems/back/snmp-handler:4.2.0              ...        3 minutes ago   UP 3 minutes   ...     ems-snmp-handler-1
-...           localhost:5000/ems/middle/socket-hub:4.2.0              ...        3 minutes ago   UP 3 minutes   ...     ems-socket-proxy-1
-...           localhost:5000/ems/back/ssh-checker:4.2.0               ...        3 minutes ago   UP 3 minutes   ...     ems-ssh-checker-1
-...           localhost:5000/ems/back/ssh-web-console-upgraded:4.2.0  ...        3 minutes ago   UP 3 minutes   ...     ems-ssh-web-console-1
-...           localhost:5000/ems/back/syslog-getter:4.2.0             ...        3 minutes ago   UP 3 minutes   ...     ems-syslog-getter-1
-...           localhost:5000/ems/back/syslog-handler:4.2.0            ...        3 minutes ago   UP 3 minutes   ...     ems-syslog-handler-1
-...           localhost:5000/ems/back/watchdog:4.2.0                  ...        3 minutes ago   UP 3 minutes   ...     ems-watchdog-1
+...           localhost:5000/ems/back/smart-handler:4.2.1             ...        3 minutes ago   UP 3 minutes   ...     ems-smart-handler-1
+...           localhost:5000/ems/back/snmp-handler:4.2.1              ...        3 minutes ago   UP 3 minutes   ...     ems-snmp-handler-1
+...           localhost:5000/ems/middle/socket-hub:4.2.1              ...        3 minutes ago   UP 3 minutes   ...     ems-socket-proxy-1
+...           localhost:5000/ems/back/ssh-checker:4.2.1               ...        3 minutes ago   UP 3 minutes   ...     ems-ssh-checker-1
+...           localhost:5000/ems/back/ssh-web-console-upgraded:4.2.1  ...        3 minutes ago   UP 3 minutes   ...     ems-ssh-web-console-1
+...           localhost:5000/ems/back/syslog-getter:4.2.1             ...        3 minutes ago   UP 3 minutes   ...     ems-syslog-getter-1
+...           localhost:5000/ems/back/syslog-handler:4.2.1            ...        3 minutes ago   UP 3 minutes   ...     ems-syslog-handler-1
+...           localhost:5000/ems/back/watchdog:4.2.1                  ...        3 minutes ago   UP 3 minutes   ...     ems-watchdog-1
 ...           registry:2                                              ...        3 minutes ago   Up 3 minutes   ...     registry
 ```
 
@@ -2148,11 +2148,11 @@ EMS, выполнив команду:
 
 ### Перечень ссылочных документов
 
-- Руководство пользователя EMS v4.2.0;
-- Руководство администратора Системы EMS v4.2.0;
-- Руководство по инсталляции Системы EMS v4.2.0 в режиме одной ноды;
-- Руководство по обновлению Системы EMS с версии 3.5.3 до версии 4.2.0 в режиме одной ноды;  
-- Программа и методика испытаний системы EMS v4.2.0.
+- Руководство пользователя EMS v4.2.1;
+- Руководство администратора Системы EMS v4.2.1;
+- Руководство по инсталляции Системы EMS v4.2.1 в режиме одной ноды;
+- Руководство по обновлению Системы EMS с версии 3.5.3 до версии 4.2.1 в режиме одной ноды;  
+- Программа и методика испытаний системы EMS v4.2.1.
 
 ### Справочная информация
 
