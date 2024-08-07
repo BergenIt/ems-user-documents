@@ -195,7 +195,7 @@ EMS в режиме HA - это конфигурация системы EMS дл
 
 ### Подготовка окружения для базовой установки системы
 
-Подготовьте 6 виртуальных машин с ОС Oracle Linux 8.9, установите на них docker версии 24.0.7, а также плагин docker-buildx-plugin версии 0.13.1.
+Подготовьте 6 виртуальных машин с ОС Oracle Linux 8.9, установите на них docker версии 26.1.3, а также плагин docker-buildx-plugin версии 0.14.0.
 
 Виртуальные машины должны быть соединены сетевым каналом пропускной способностью не менее 1GB.
 
@@ -537,7 +537,7 @@ watch -c 'docker service ps $(docker service ls -q) | grep Running'
 
 ### Подготовка окружения для промышленной установки системы
 
-Подготовьте 6 виртуальных машин с ОС Oracle Linux 8.9, установите на них docker версии 24.0.7, а также плагин docker-buildx-plugin версии 0.13.1.
+Подготовьте 6 виртуальных машин с ОС Oracle Linux 8.9, установите на них docker версии 26.1.3, а также плагин docker-buildx-plugin версии 0.14.0.
 
 Виртуальные машины должны быть соединены сетевым каналом пропускной способностью не менее 1GB.
 
@@ -678,12 +678,12 @@ docker node update --label-add data=DATA ID
 
 ```bash
 ID                            HOSTNAME                        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
-gtixfx504y3ua02hxe31o88jo     ems-my-data-center-node          Ready     Active         Reachable        24.0.7
-puvsf9z68duy39ahin22eehg4     ems-my-any-data-center-node      Ready     Active                          24.0.7
-8bwzq6vlqvu9ojabbvkt0dcln     ems-dc2-1                        Ready     Active         Reachable        24.0.7
-x3a4itq8of33l2bvjbv02h3v1     ems-dc2-2                        Ready     Active         Reachable        24.0.7
-eunu3gm38wmiaq4c3nbuekvs2     ems-data-center-node             Ready     Active         Leader           24.0.7
-osdf0ro6yvd79trt0oqvegm9t *   ems-data-center-node             Ready     Active         Reachable        24.0.7
+gtixfx504y3ua02hxe31o88jo     ems-my-data-center-node          Ready     Active         Reachable        26.1.3
+puvsf9z68duy39ahin22eehg4     ems-my-any-data-center-node      Ready     Active                          26.1.3
+8bwzq6vlqvu9ojabbvkt0dcln     ems-dc2-1                        Ready     Active         Reachable        26.1.3
+x3a4itq8of33l2bvjbv02h3v1     ems-dc2-2                        Ready     Active         Reachable        26.1.3
+eunu3gm38wmiaq4c3nbuekvs2     ems-data-center-node             Ready     Active         Leader           26.1.3
+osdf0ro6yvd79trt0oqvegm9t *   ems-data-center-node             Ready     Active         Reachable        26.1.3
 ```
 
 Это будет набор команд:

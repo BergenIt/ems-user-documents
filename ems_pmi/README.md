@@ -65,7 +65,7 @@
   - Ubuntu 22.04.1 LTS Server;
   - Astra Linux Common Edition 1.7_x86-64;
   - RedOS 7.3.
-- Docker 24.0.9;
+- Docker 26.1.3;
 - Docker Compose version 2.18.0;
 - Яндекс Браузер Версия 24.1.5.803+ (64-bit);
 - Браузер Google Chrome, Версия 124.0.6367.62+ (64 бит).
