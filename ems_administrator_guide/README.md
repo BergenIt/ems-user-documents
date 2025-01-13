@@ -347,9 +347,7 @@
 Для того, чтобы выполнить проверку ВМ `single-node` выполните команды:
 
 ```bash
-gzip -d ~/ems-4.3.0.tar.gz
-mkdir -p ~/ems-4.3.0
-tar -xvf ~/ems-4.3.0.tar -C ~/ems-4.3.0
+tar -xzvf ~/ems-4.3.0.tgz
 mv -f ~/license.json ~/ems-4.3.0/master/config/license.json
 cd ~/ems-4.3.0
 chmod +x -R bin/* executable/*
